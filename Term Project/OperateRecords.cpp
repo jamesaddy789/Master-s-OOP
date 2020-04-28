@@ -53,7 +53,7 @@ void ReadEntriesFromFile()
 		stringstream string_stream(current_line);
 		string name, brand, model, serial, location;	
 		int speed, inventory_number,  installation_year, installation_month, installation_day_of_month;	
-		string_stream >> name << brand << model << speed << serial << inventory_number << location << installation_year << installation_month << installation_day_of_month;
+		string_stream >> name >> brand >> model >> speed >> serial >> inventory_number >> location >> installation_year >> installation_month >> installation_day_of_month;
 		SimpleDate install_date(installation_year, installation_month, installation_day_of_month);	
 		InstallRecord record(name, brand, model, speed, serial, inventory_number, location, install_date);
 		install_record_list.Insert(record);
