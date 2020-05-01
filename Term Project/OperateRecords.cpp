@@ -43,7 +43,7 @@ void ReadEntriesFromFile()
 		input_file.open(file_name);
 		if (!input_file)
 		{
-			cout << "There is currently no original.dat or update.dat file to read from.";
+			cout << "There is currently no " << original_file_name << " or " << update_file_name << " file to read from." << endl;
 			return;
 		}
 	}
@@ -58,11 +58,29 @@ void ReadEntriesFromFile()
 		InstallRecord record(name, brand, model, speed, serial, inventory_number, location, install_date);
 		install_record_list.Insert(record);
 	}
+	input_file.close();
 }
 
 void SaveEntriesToFile()
 {
-
+	ofstream save_file(update_file_name);
+	for (int i = 0; i < install_record_list.GetLength(); i++)
+	{
+		InstallRecord record = install_record_list[i];
+		SimpleDate record_date = record.GetDate();
+		save_file << record.GetName() << " " 
+			<< record.GetBrand() << " "
+			<< record.GetModel() << " "
+			<< record.GetSpeed() << " "
+			<< record.GetSerial() << " "
+			<< record.GetNumber() << " "
+			<< record.GetLocation() << " "
+			<< record_date.GetYear() << " "
+			<< record_date.GetMonth() << " "
+			<< record_date.GetDayOfMonth() << endl;
+	}
+	save_file.close();
+	cout << "Install records have been saved to " << update_file_name << "." << endl;
 }
 
 void HandleOperations()
@@ -79,7 +97,7 @@ void HandleOperations()
 			<< "e. Print a list of all computers in a given location.\n"
 			<< "f. Print a list of all computer of a particular brand.\n"
 			<< "g. Print a list of all computer installed before a given date.\n"
-			<< "h. Save entries to update.dat.\n"
+			<< "h. Save entries to " << update_file_name << "\n"
 			<< exit_character << ". Exit\n\n"
 			<< "Enter the character (lowercase) of the desired operation: ";
 		cin >> user_operation;
