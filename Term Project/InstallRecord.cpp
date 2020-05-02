@@ -25,5 +25,13 @@ void InstallRecord::Write() const
 
 void InstallRecord::ChangeLocation(string newLocation)
 {
-	location = newLocation;
+	this->location = newLocation;
+}
+
+bool InstallRecord::operator==(const InstallRecord& install_record)
+{
+	return this->GetName() == install_record.GetName() && this->GetBrand() == install_record.GetBrand()
+		&& this->GetModel() == install_record.GetModel() && this->GetSpeed() == install_record.GetSpeed()
+		&& this->GetLocation() == install_record.GetLocation() && this->GetNumber() == install_record.GetNumber()
+		&& this->GetSerial() == install_record.GetSerial() && this->GetDate() == install_record.GetDate();
 }

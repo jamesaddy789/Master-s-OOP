@@ -11,12 +11,12 @@ public:
 	SortedList();
 	SortedList(size_t max_size);
 	~SortedList<T>();
-	void Insert(T item);
-	void Delete(T item);
-	int GetPos(T item);
+	void Insert(T& item);
+	void Delete(int position);
+	int GetPos(const T& item);
 	void Clear();
 	int GetLength();
-	T operator[](int index);
+	T& operator[](int index);
 private:
 	size_t max_size; 
 	T* items;
@@ -59,7 +59,7 @@ void SortedList<T>::Resize()
 }
 
 template<class T>
-void SortedList<T>::Insert(T item)
+void SortedList<T>::Insert(T& item)
 {
 	if (length + 1 > max_size)
 	{
@@ -76,10 +76,9 @@ void SortedList<T>::Insert(T item)
 }
 
 template<class T>
-void SortedList<T>::Delete(T item)
+void SortedList<T>::Delete(int position)
 {
-	int position = GetPos(item);
-	if (position != -1)
+	if (position >= 0)
 	{
 		for (int i = position; i < length - 1; i++)
 		{
@@ -90,7 +89,7 @@ void SortedList<T>::Delete(T item)
 }
 
 template<class T>
-int SortedList<T>::GetPos(T item)
+int SortedList<T>::GetPos(const T& item)
 {
 	//Binary Search
 	int first = 0;
@@ -128,7 +127,7 @@ int SortedList<T>::GetLength()
 }
 
 template<class T>
-T SortedList<T>::operator[](int index)
+T& SortedList<T>::operator[](int index)
 {
 	return items[index];
 }

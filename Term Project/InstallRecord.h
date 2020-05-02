@@ -13,6 +13,7 @@ class InstallRecord : public Computer
 		SimpleDate GetDate() const;
 		void ChangeLocation(string newLocation);
 		void Write() const;
+		bool operator==(const InstallRecord& install_record);
 	private:
 		string location;
 		SimpleDate date;
